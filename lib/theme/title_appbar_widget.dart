@@ -18,3 +18,21 @@ PreferredSizeWidget titleAppBar(String text) {
     ),
   );
 }
+
+PreferredSizeWidget qrTitleAppBar(String text) {
+  return AppBar(
+    iconTheme: IconThemeData(color: onSurface),
+    elevation: 0,
+    backgroundColor: surface.withOpacity(0.5),
+    centerTitle: true,
+    title: Text(
+      text,
+      style: TextStyle(
+        fontSize: 22,
+        color: onSurface,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Main',
+      ),
+    ),
+  );
+}
