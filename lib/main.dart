@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/route_manager.dart';
 import 'package:uu_project/screens/home_screen.dart';
+import 'package:uu_project/screens/login_screen.dart';
 import 'package:uu_project/screens/payment_method_screen.dart';
 import 'package:uu_project/screens/payment_screen.dart';
 import 'package:uu_project/screens/rent_qr_locker.dart';
@@ -20,48 +22,54 @@ class UUApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'UU',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: primary,
-        backgroundColor: surface,
-      ),
-      home: const HomeScreen(),
-      getPages: [
-        GetPage(
-          name: '/home',
-          page: () => const HomeScreen(),
-        ),
-        GetPage(
-          name: '/paymentMethod',
-          page: () => const PaymentMethodScreen(),
-        ),
-        GetPage(
-          name: '/payment',
-          page: () => const PaymentScreen(),
-        ),
-        GetPage(
-          name: '/rent_qr_locker',
-          page: () => const RentQRLockerScreen(),
-        ),
-        GetPage(
-          name: '/rent_qr_umb',
-          page: () => const RentQRUmbScreen(),
-        ),
-        GetPage(
-          name: '/renting',
-          page: () => RentingScreen(),
-        ),
-        GetPage(
-          name: '/return_qr_locker',
-          page: () => const ReturnQRLockerScreen(),
-        ),
-        GetPage(
-          name: '/return_qr_umb',
-          page: () => const ReturnQRUmbScreen(),
-        ),
-      ],
-    );
+    return ScreenUtilInit(
+        designSize: const Size(1125, 2436),
+        builder: () => GetMaterialApp(
+              title: 'UU',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primaryColor: primary,
+                backgroundColor: surface,
+              ),
+              home: const LoginScreen(),
+              getPages: [
+                GetPage(
+                  name: '/login',
+                  page: () => const LoginScreen(),
+                ),
+                GetPage(
+                  name: '/home',
+                  page: () => const HomeScreen(),
+                ),
+                GetPage(
+                  name: '/paymentMethod',
+                  page: () => const PaymentMethodScreen(),
+                ),
+                GetPage(
+                  name: '/payment',
+                  page: () => const PaymentScreen(),
+                ),
+                GetPage(
+                  name: '/rent_qr_locker',
+                  page: () => const RentQRLockerScreen(),
+                ),
+                GetPage(
+                  name: '/rent_qr_umb',
+                  page: () => const RentQRUmbScreen(),
+                ),
+                GetPage(
+                  name: '/renting',
+                  page: () => RentingScreen(),
+                ),
+                GetPage(
+                  name: '/return_qr_locker',
+                  page: () => const ReturnQRLockerScreen(),
+                ),
+                GetPage(
+                  name: '/return_qr_umb',
+                  page: () => const ReturnQRUmbScreen(),
+                ),
+              ],
+            ));
   }
 }
