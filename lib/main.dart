@@ -22,9 +22,9 @@ class UUApp extends StatelessWidget {
           primaryColor: primary,
           backgroundColor: surface,
         ),
-        home: const HomeScreen(),
+        home: HomeScreen(),
         routes: {
-          '/home': (context) => const HomeScreen(),
+          '/home': (context) => HomeScreen(),
           '/paymentMethod': (context) => const PaymentMethodScreen(),
           '/payment': (context) => const PaymentScreen(),
           '/rent_qr_locker':(constext) => const RentQRLockerScreen(),

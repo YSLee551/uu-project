@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/drawer_tile_widget.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   final bool paymentMethod = true; //TODO: 백엔드 연결하기 전 테스트용이므로 나중에 지우기
-
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +49,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             drawerTile(
-                name: "결제수단 등록",
+                name: "결제수단 등록",
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/paymentMethod');
@@ -71,7 +74,7 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: primary,
       ),
-      body: Center(),
+      body: Map(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: mainButton(
           buttonText: "대여하기",
@@ -80,6 +83,55 @@ class HomeScreen extends StatelessWidget {
                 ? Navigator.pushNamed(context, '/payment')
                 : Navigator.pushNamed(context, '/paymentMethod');
           }),
+    );
+  }
+}
+
+class Map extends StatelessWidget {
+  const Map({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      child: ShowMap(),
+    );
+  }
+
+  @override
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+class ShowMap extends StatefulWidget {
+  const ShowMap({Key? key}) : super(key: key);
+
+  @override 
+  _ShowMapState createState() => _ShowMapState();
+}
+
+class _ShowMapState extends State<ShowMap> {
+  final Completer<GoogleMapController> _controller = Completer();
+  static const handong = CameraPosition(
+    target: LatLng(36.10308582709887, 129.38844269323445),
+    zoom: 16.8,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: Center(
+        child: GoogleMap(
+          mapType: MapType.normal,
+          initialCameraPosition: handong,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+          compassEnabled: true,
+          zoomGesturesEnabled: true,
+          rotateGesturesEnabled: true,
+          scrollGesturesEnabled: true,
+          tiltGesturesEnabled: true,
+        ),
+      ),
     );
   }
 }
