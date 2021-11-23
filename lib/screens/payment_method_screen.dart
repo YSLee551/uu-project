@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/title_appbar_widget.dart';
 
@@ -15,7 +16,7 @@ class PaymentMethodScreen extends StatelessWidget {
           buttonText: "등록하기",
           elevation: 0,
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           }),
     );
   }

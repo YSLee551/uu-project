@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/drawer_tile_widget.dart';
@@ -51,15 +52,15 @@ class HomeScreen extends StatelessWidget {
             drawerTile(
                 name: "결제수단 등록",
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/paymentMethod');
+                  Get.back();
+                  Get.toNamed('/paymentMethod');
                 }),
             const Divider(),
             drawerTile(
                 name: "로그아웃",
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/paymentMethod'); //TODO: 로그아웃
+                  Get.back();
+                  Get.toNamed('/paymentMethod'); //TODO: 로그아웃
                 })
           ],
         ),
@@ -80,8 +81,8 @@ class HomeScreen extends StatelessWidget {
           buttonText: "대여하기",
           onPressed: () {
             paymentMethod
-                ? Navigator.pushNamed(context, '/payment')
-                : Navigator.pushNamed(context, '/paymentMethod');
+                ? Get.toNamed('/payment')
+                : Get.toNamed('/paymentMethod');
           }),
     );
   }

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:uu_project/controllers/rent_controller.dart';
+import 'package:uu_project/controllers/return_controller.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/title_appbar_widget.dart';
 
-class RentQRUmbScreen extends StatefulWidget {
-  const RentQRUmbScreen({Key? key}) : super(key: key);
+class ReturnQRLockerScreen extends StatefulWidget {
+  const ReturnQRLockerScreen({Key? key}) : super(key: key);
 
   @override
-  State<RentQRUmbScreen> createState() => _RentQRUmbScreenState();
+  State<ReturnQRLockerScreen> createState() => _ReturnQRLockerScreenState();
 }
 
-class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
+class _ReturnQRLockerScreenState extends State<ReturnQRLockerScreen> {
   final qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   Barcode? _barcode;
-  Set<String> umbIDs = {'1', '2', '3', '4'};
+  Set<String> lockerIDs = {'1001', '1002', '1003', '1004'};
 
   @override
   void dispose() {
@@ -28,7 +28,7 @@ class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: qrTitleAppBar("우산 QR코드 인식"),
+      appBar: qrTitleAppBar("보관함 QR코드 인식"),
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -41,10 +41,9 @@ class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
           buttonText: "다음",
           elevation: 0,
           onPressed: () {
-            if (_barcode != null && umbIDs.contains(_barcode!.code)) {
-              RentController.setUmb(_barcode!.code!);
-              //TODO: rent data DB로 올려주고 정보 받아오기
-              Get.offAllNamed('/renting');
+            if (_barcode != null && lockerIDs.contains(_barcode!.code)) {
+              ReturnController.setLocker(_barcode!.code!);
+              Get.offNamed('/return_qr_umb');
             }
           }),
     );
@@ -53,10 +52,10 @@ class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
   Widget buildResult() {
     return Text(
       _barcode != null
-          ? umbIDs.contains(_barcode!.code)
-              ? "우산 ${_barcode!.code}\n인식되었습니다."
-              : "우산에 부착된 QR코드를\n인식시켜주세요."
-          : "우산에 부착된 QR코드를\n인식시켜주세요.",
+          ? lockerIDs.contains(_barcode!.code)
+              ? "보관함 ${_barcode!.code![3]}\n인식되었습니다."
+              : "우산 보관함에 부착된 QR코드를\n인식시켜주세요."
+          : "우산 보관함에 부착된 QR코드를\n인식시켜주세요.",
       style: TextStyle(
         color: surface,
         fontFamily: 'main',
@@ -92,7 +91,6 @@ class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
         this._barcode = _barcode;
       });
     });
-    //TODO: rent controller로 올려주기
-    //if (_barcode != null && lockerIDs.contains(_barcode!.code)) Navigator.pushReplacementNamed(context, '/rent_qr_umb', arguments: _barcode?.code);
+    //Navigator.pushReplacementNamed(context, '/rent_qr_umb', arguments: _barcode?.code);
   }
 }
