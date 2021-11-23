@@ -39,6 +39,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   flutter_screenutil: ^5.0.0+2
   provider: ^6.0.1
+  google_maps_flutter: ^2.1.0
 
 dev_dependencies:
   flutter_test:
