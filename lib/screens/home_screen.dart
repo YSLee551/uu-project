@@ -112,7 +112,7 @@ class _ShowMapState extends State<ShowMap> {
   final Completer<GoogleMapController> _controller = Completer();
   static const handong = CameraPosition(
     target: LatLng(36.10308582709887, 129.38844269323445),
-    zoom: 16.8,
+    zoom: 17.5,
   );
 
   @override
@@ -125,11 +125,12 @@ class _ShowMapState extends State<ShowMap> {
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
           },
-          compassEnabled: true,
+          compassEnabled:true,
           zoomGesturesEnabled: true,
           rotateGesturesEnabled: true,
-          scrollGesturesEnabled: true,
           tiltGesturesEnabled: true,
+          myLocationButtonEnabled: false,
+          cameraTargetBounds: CameraTargetBounds(LatLngBounds(northeast: const LatLng(36.105136, 129.392519), southwest: const LatLng(36.101216, 129.385075))),
         ),
       ),
     );
