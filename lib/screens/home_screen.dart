@@ -9,8 +9,7 @@ import 'dart:async';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   final bool paymentMethod = true; //TODO: 백엔드 연결하기 전 테스트용이므로 나중에 지우기
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +104,7 @@ class Map extends StatelessWidget {
 class ShowMap extends StatefulWidget {
   const ShowMap({Key? key}) : super(key: key);
 
-  @override 
+  @override
   _ShowMapState createState() => _ShowMapState();
 }
 
@@ -113,7 +112,7 @@ class _ShowMapState extends State<ShowMap> {
   final Completer<GoogleMapController> _controller = Completer();
   static const handong = CameraPosition(
     target: LatLng(36.10308582709887, 129.38844269323445),
-    zoom: 16.8,
+    zoom: 17.5,
   );
 
   @override
@@ -126,11 +125,13 @@ class _ShowMapState extends State<ShowMap> {
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
           },
-          compassEnabled: true,
-          zoomGesturesEnabled: true,
-          rotateGesturesEnabled: true,
-          scrollGesturesEnabled: true,
-          tiltGesturesEnabled: true,
+          rotateGesturesEnabled: false,
+          tiltGesturesEnabled: false,
+          myLocationButtonEnabled: false,
+          minMaxZoomPreference: const MinMaxZoomPreference(17.5, 17.5),
+          cameraTargetBounds: CameraTargetBounds(LatLngBounds(
+              northeast: const LatLng(36.105136, 129.392519),
+              southwest: const LatLng(36.101216, 129.385075))),
         ),
       ),
     );

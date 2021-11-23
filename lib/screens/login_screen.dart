@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:uu_project/controllers/authentication.dart';
 import 'package:uu_project/theme/colors.dart';
+import 'package:uu_project/theme/google_sign_in_button_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -47,6 +49,21 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(
               height: 50.h,
+            ),
+            FutureBuilder(
+              future: Authentication.initializeFirebase(context: context),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error initializing Firebase');
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  return const GoogleSignInButton();
+                }
+                return CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    accent,
+                  ),
+                );
+              },
             ),
             SignInButton(
               Buttons.Google,
