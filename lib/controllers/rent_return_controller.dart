@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
+import 'package:uu_project/controllers/database.dart';
 
-class ReturnController {
+class RentReturnController {
   static String _lockerID = '';
   static String _umbID = '';
 
@@ -18,6 +19,18 @@ class ReturnController {
 
   static String getUmb() {
     return _umbID;
+  }
+
+  static void returnUmb() {
+    DataBase.addUmbToLocker(umbId: _umbID, lockerId: _lockerID);
+  }
+
+  static void rentUmb() {
+    DataBase.removeUmbFromLocker(umbId: _umbID, lockerId: _lockerID);
+  }
+
+  static void getUmbrellaInfo() {
+    DataBase.getUmbInfo(umbId: _umbID);
   }
 
   //TODO: DB에 한번에 올리는 메소드

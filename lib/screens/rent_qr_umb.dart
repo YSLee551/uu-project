@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:uu_project/controllers/rent_controller.dart';
+import 'package:uu_project/controllers/rent_return_controller.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/title_appbar_widget.dart';
@@ -42,7 +42,8 @@ class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
           elevation: 0,
           onPressed: () {
             if (_barcode != null && umbIDs.contains(_barcode!.code)) {
-              RentController.setUmb(_barcode!.code!);
+              RentReturnController.setUmb(_barcode!.code!);
+              RentReturnController.rentUmb();
               //TODO: rent data DB로 올려주고 정보 받아오기
               Get.offAllNamed('/renting');
             }

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uu_project/theme/colors.dart';
 
 import '../controllers/authentication.dart';
 import '../controllers/database.dart';
@@ -26,57 +27,60 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: _isSigningIn
-          ? const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          ? CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(accent),
             )
           : OutlinedButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white),
+                backgroundColor: MaterialStateProperty.all(primary),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40),
                   ),
                 ),
               ),
-              onPressed: () {
-                Get.toNamed('/home');
-              }
-              // async {
-              //   setState(() {
-              //     _isSigningIn = true;
-              //   });
+              onPressed: () async {
+                setState(() {
+                  _isSigningIn = true;
+                });
 
-              //   User? user =
-              //       await Authentication.signInWithGoogle(context: context);
+                User? user =
+                    await Authentication.signInWithGoogle(context: context);
 
-              //   setState(() {
-              //     _isSigningIn = false;
-              //   });
+                setState(() {
+                  _isSigningIn = false;
+                });
 
-              //   if (user != null) {
-              //     Database.userUid = user.uid;
+                if (user != null) {
+                  DataBase.userID = user.uid;
 
-              //     Get.offNamed('/home');
-              //   }
-              // }
-              ,
+                  Get.offNamed('/home');
+                }
+              },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
+                    const SizedBox(
+                        width: 20,
+                        child:
+                            Image(image: AssetImage('assets/google_logo.png'))),
                     Padding(
-                      padding: EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(
+                          left: 20, top: 5, bottom: 6, right: 10),
                       child: Text(
-                        'Sign in with Google',
+                        '구글 계정으로 로그인',
                         style: TextStyle(
+                          color: surface,
+                          fontFamily: 'main',
                           fontSize: 20,
-                          color: Colors.black54,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.bold,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
