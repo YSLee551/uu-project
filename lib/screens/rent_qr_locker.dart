@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:uu_project/controllers/rent_controller.dart';
+import 'package:uu_project/controllers/rent_return_controller.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/title_appbar_widget.dart';
@@ -42,7 +42,7 @@ class _RentQRLockerScreenState extends State<RentQRLockerScreen> {
           elevation: 0,
           onPressed: () {
             if (_barcode != null && lockerIDs.contains(_barcode!.code)) {
-              RentController.setLocker(_barcode!.code!);
+              RentReturnController.setLocker(_barcode!.code!);
               Get.offNamed('/rent_qr_umb');
             }
           }),

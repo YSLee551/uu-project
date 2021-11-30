@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 50.h,
+              height: 60.h,
             ),
             FutureBuilder(
               future: Authentication.initializeFirebase(context: context),
@@ -64,11 +64,6 @@ class LoginScreen extends StatelessWidget {
                   ),
                 );
               },
-            ),
-            SignInButton(
-              Buttons.Google,
-              onPressed: () {},
-              text: "한동대학교 계정 구글 로그인",
             ),
             SizedBox(
               height: 150.h,

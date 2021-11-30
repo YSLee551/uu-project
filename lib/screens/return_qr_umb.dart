@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:uu_project/controllers/return_controller.dart';
+import 'package:uu_project/controllers/rent_return_controller.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/title_appbar_widget.dart';
+import 'package:image_picker/image_picker.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 
 class ReturnQRUmbScreen extends StatefulWidget {
   const ReturnQRUmbScreen({Key? key}) : super(key: key);
@@ -40,9 +42,13 @@ class _ReturnQRUmbScreenState extends State<ReturnQRUmbScreen> {
       floatingActionButton: mainButton(
           buttonText: "다음",
           elevation: 0,
-          onPressed: () {
+          onPressed: () async {
             if (_barcode != null && umbIDs.contains(_barcode!.code)) {
-              ReturnController.setLocker(_barcode!.code!);
+              RentReturnController.setUmb(_barcode!.code!);
+              RentReturnController.returnUmb();
+              final ImagePicker _picker = ImagePicker();
+              final XFile? photo =
+                  await _picker.pickImage(source: ImageSource.camera);
               //TODO: rent data DB로 올려주고 정보 받아오기
               Get.offAllNamed('/home');
             }
@@ -95,4 +101,31 @@ class _ReturnQRUmbScreenState extends State<ReturnQRUmbScreen> {
     //TODO: rent controller로 올려주기
     //if (_barcode != null && lockerIDs.contains(_barcode!.code)) Navigator.pushReplacementNamed(context, '/rent_qr_umb', arguments: _barcode?.code);
   }
+
+  // void uploadImageToStorage(ImageSource source) async {
+  //   File image = await ImagePicker.pickImage(source: source);
+
+  //   if (image == null) return;
+  //   setState(() {
+  //     _image = image;
+  //   });
+
+  //   // 프로필 사진을 업로드할 경로와 파일명을 정의. 사용자의 uid를 이용하여 파일명의 중복 가능성 제거
+  //   StorageReference storageReference =
+  //       _firebaseStorage.ref().child("profile/${_user.uid}");
+
+  //   // 파일 업로드
+  //   StorageUploadTask storageUploadTask = storageReference.putFile(_image);
+
+  //   // 파일 업로드 완료까지 대기
+  //   await storageUploadTask.onComplete;
+
+  //   // 업로드한 사진의 URL 획득
+  //   String downloadURL = await storageReference.getDownloadURL();
+
+  //   // 업로드된 사진의 URL을 페이지에 반영
+  //   setState(() {
+  //     _profileImageURL = downloadURL;
+  //   });
+  // }
 }
