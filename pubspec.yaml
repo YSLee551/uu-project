@@ -30,7 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+<<<<<<< HEAD
   google_maps_flutter: ^2.1.0
+=======
+>>>>>>> eaf1b5dc672347375071f37a9202276a13ab58bc
   qr_code_scanner: ^0.6.1
   get: ^4.3.8
   google_sign_in: ^5.2.1

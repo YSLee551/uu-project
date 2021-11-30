@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+<<<<<<< HEAD
 import 'package:get/get.dart';
+=======
+>>>>>>> eaf1b5dc672347375071f37a9202276a13ab58bc
 import 'package:uu_project/theme/colors.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -51,8 +54,12 @@ class LoginScreen extends StatelessWidget {
             ),
             SignInButton(
               Buttons.Google,
+<<<<<<< HEAD
               onPressed: () {Get.offNamed('/home');},
               
+=======
+              onPressed: () {},
+>>>>>>> eaf1b5dc672347375071f37a9202276a13ab58bc
               text: "한동대학교 계정 구글 로그인",
             ),
             SizedBox(

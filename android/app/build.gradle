@@ -46,7 +46,11 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.uu_project"
 <<<<<<< HEAD
+<<<<<<< HEAD
         minSdkVersion 20
+=======
+        minSdkVersion 21
+>>>>>>> eaf1b5dc672347375071f37a9202276a13ab58bc
 =======
         minSdkVersion 21
 >>>>>>> eaf1b5dc672347375071f37a9202276a13ab58bc
