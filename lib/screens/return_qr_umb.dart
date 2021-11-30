@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:uu_project/controllers/rent_controller.dart';
+import 'package:uu_project/controllers/return_controller.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/title_appbar_widget.dart';
 
-class RentQRUmbScreen extends StatefulWidget {
-  const RentQRUmbScreen({Key? key}) : super(key: key);
+class ReturnQRUmbScreen extends StatefulWidget {
+  const ReturnQRUmbScreen({Key? key}) : super(key: key);
 
   @override
-  State<RentQRUmbScreen> createState() => _RentQRUmbScreenState();
+  State<ReturnQRUmbScreen> createState() => _ReturnQRUmbScreenState();
 }
 
-class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
+class _ReturnQRUmbScreenState extends State<ReturnQRUmbScreen> {
   final qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   Barcode? _barcode;
@@ -42,9 +42,9 @@ class _RentQRUmbScreenState extends State<RentQRUmbScreen> {
           elevation: 0,
           onPressed: () {
             if (_barcode != null && umbIDs.contains(_barcode!.code)) {
-              RentController.setUmb(_barcode!.code!);
+              ReturnController.setLocker(_barcode!.code!);
               //TODO: rent data DB로 올려주고 정보 받아오기
-              Get.offAllNamed('/renting');
+              Get.offAllNamed('/home');
             }
           }),
     );

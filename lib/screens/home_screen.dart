@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:uu_project/theme/button_widget.dart';
 import 'package:uu_project/theme/colors.dart';
 import 'package:uu_project/theme/drawer_tile_widget.dart';
@@ -51,15 +52,15 @@ class HomeScreen extends StatelessWidget {
             drawerTile(
                 name: "결제수단 등록",
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/paymentMethod');
+                  Get.back();
+                  Get.toNamed('/paymentMethod');
                 }),
             const Divider(),
             drawerTile(
                 name: "로그아웃",
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/paymentMethod'); //TODO: 로그아웃
+                  Get.back();
+                  Get.toNamed('/paymentMethod'); //TODO: 로그아웃
                 })
           ],
         ),
@@ -80,8 +81,8 @@ class HomeScreen extends StatelessWidget {
           buttonText: "대여하기",
           onPressed: () {
             paymentMethod
-                ? Navigator.pushNamed(context, '/payment')
-                : Navigator.pushNamed(context, '/paymentMethod');
+                ? Get.toNamed('/payment')
+                : Get.toNamed('/paymentMethod');
           }),
     );
   }
@@ -110,21 +111,30 @@ class ShowMap extends StatefulWidget {
 
 class _ShowMapState extends State<ShowMap> {
   final Completer<GoogleMapController> _controller = Completer();
+  
   static const handong = CameraPosition(
     target: LatLng(36.10308582709887, 129.38844269323445),
     zoom: 17.5,
   );
+  
+  final Set<Marker> markers = new Set();
+    
+  static const LatLng showLocation = LatLng(36.10308582709887, 129.38844269323445);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Center(
         child: GoogleMap(
+          markers: getmarkers(),
           mapType: MapType.normal,
           initialCameraPosition: handong,
           onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
+            setState((){
+              _controller.complete(controller);
+            });
           },
+          
           compassEnabled:true,
           zoomGesturesEnabled: true,
           rotateGesturesEnabled: true,
@@ -134,5 +144,37 @@ class _ShowMapState extends State<ShowMap> {
         ),
       ),
     );
+  }
+  Set<Marker> getmarkers() {
+    setState((){
+      markers.add(Marker(
+        markerId: MarkerId(showLocation.toString()),
+        position: const LatLng(36.103698, 129.387437),
+        infoWindow: const InfoWindow(
+          title: '느헤미야 NMH',
+          snippet: '우산갯수 : 4개',
+        ),
+        icon: BitmapDescriptor.defaultMarker
+      ));
+      markers.add(Marker(
+        markerId: MarkerId(showLocation.toString()),
+        position: const LatLng(36.103328, 129.386886),
+        infoWindow: const InfoWindow(
+          title: '뉴턴 NTH',
+          snippet: '우산갯수 : 4개',
+        ),
+        icon: BitmapDescriptor.defaultMarker
+      ));
+      markers.add(Marker(
+        markerId: MarkerId(showLocation.toString()),
+        position: const LatLng(36.102789, 129.387098),
+        infoWindow: const InfoWindow(
+          title: '오석 OH',
+          snippet: '우산갯수 : 4개',
+        ),
+        icon: BitmapDescriptor.defaultMarker
+      ));
+    });
+    return markers;
   }
 }
